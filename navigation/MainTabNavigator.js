@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import SocialMediaScreen from '../screens/SocialMediaScreen';
+import FriendsScreen from '../screens/FriendsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -26,12 +26,12 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const SocialMediaStack = createStackNavigator({
-  SocialMedia: SocialMediaScreen,
+const FriendsStack = createStackNavigator({
+  Friends: FriendsScreen,
 });
 
-SocialMediaStack.navigationOptions = {
-  tabBarLabel: 'Social Media',
+FriendsStack.navigationOptions = {
+  tabBarLabel: 'Friends',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -77,8 +77,8 @@ ProfileStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  SocialMediaStack,
+  FriendsStack,
   HomeStack,
   ProfileStack,
-  SettingsStack,
+  SettingsStack
 });
