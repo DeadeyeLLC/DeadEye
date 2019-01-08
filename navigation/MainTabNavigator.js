@@ -4,8 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import SocialMediaScreen from '../screens/SocialMediaScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -25,16 +26,20 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const SocialMediaStack = createStackNavigator({
+  SocialMedia: SocialMediaScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+SocialMediaStack.navigationOptions = {
+  tabBarLabel: 'Social Media',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-people${focused ? '' : '-outline'}`
+          : 'md-people'
+      }
     />
   ),
 };
@@ -53,8 +58,27 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
+});
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-contact${focused ? '' : '-outline'}`
+          : 'md-contact'
+      }
+    />
+  ),
+};
+
 export default createBottomTabNavigator({
+  SocialMediaStack,
   HomeStack,
-  LinksStack,
+  ProfileStack,
   SettingsStack,
 });
