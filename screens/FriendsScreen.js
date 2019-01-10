@@ -4,6 +4,11 @@ import { List, ListItem, SearchBar } from "react-native-elements";
 
 //https://github.com/ReactNativeSchool/react-native-flatlist-demo/blob/master/FlatListDemo.js
 
+function getRandomSport() {
+  var sports = ['Lacross', 'Hockey', 'Baseball', 'Football','Soccer']
+  return sports[Math.floor(Math.random()*sports.length)];
+}
+
 class FriendsScreen extends Component {
   constructor(props) {
     super(props);
@@ -111,6 +116,7 @@ class FriendsScreen extends Component {
               subtitle={item.email}
               avatar={{ uri: item.picture.thumbnail }}
               containerStyle={{ borderBottomWidth: 0 }}
+              rightTitle={`${getRandomSport()}`}
             />
           )}
           keyExtractor={item => item.email}
