@@ -37,7 +37,7 @@ FriendsStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-people${focused ? '' : '-outline'}`
+          ? "ios-people"
           : 'md-people'
       }
     />
@@ -69,7 +69,7 @@ ProfileStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-contact${focused ? '' : '-outline'}`
+          ? "ios-contact"
           : 'md-contact'
       }
     />
