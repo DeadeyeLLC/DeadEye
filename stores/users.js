@@ -6,6 +6,7 @@ users = (function() {
   function users(numUsers) {
     this.url = (`http://api.randomuser.me/?results=${numUsers}`);
     this.users = [];
+    this.state ={ isLoading: true}
   }
 
   users.prototype.fetchUsers = function() {
@@ -22,6 +23,7 @@ users = (function() {
 
   users.prototype.setUsers = function(data) {
     this.users = data;
+    this.state.isLoading = false;
   };
 
   return users;

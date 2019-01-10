@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 import { List, ListItem } from 'react-native-elements';
 
@@ -12,12 +12,20 @@ function getRandomSport() {
   return sports[Math.floor(Math.random()*sports.length)];
 }
 
-export default class LinksScreen extends React.Component {
+export default class FriendsScreen extends React.Component {
   static navigationOptions = {
     title: `${userStore.getUsers().length} Friends`,  //Need to change to automatically update when number of friends updates
   };
 
   render() {
+    if(userStore.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/><Text>This will never stop loading. Your only option to see friends is to reload the app and hope the friends load before the list loads</Text>
+        </View>
+      )
+    }
+
     return (
       <ScrollView>
         <List>
