@@ -1,38 +1,130 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { List, ListItem, SearchBar } from "react-native-elements";
 
-import { List, ListItem } from 'react-native-elements';
+//https://github.com/ReactNativeSchool/react-native-flatlist-demo/blob/master/FlatListDemo.js
 
-var userStore = require('../stores/users');
+class FriendsScreen extends Component {
+  constructor(props) {
+    super(props);
 
-userStore.fetchUsers();
+    this.state = {
+      loading: false,
+      data: [],
+      page: 1,
+      seed: 1,
+      error: null,
+      refreshing: false
+    };
+  }
 
-function getRandomSport() {
-  var sports = ['Lacross', 'Hockey', 'Baseball', 'Football','Soccer']
-  return sports[Math.floor(Math.random()*sports.length)];
-}
+  componentDidMount() {
+    this.makeRemoteRequest();
+  }
 
-export default class LinksScreen extends React.Component {
-  static navigationOptions = {
-    title: `${userStore.getUsers().length} Friends`,  //Need to change to automatically update when number of friends updates
+  makeRemoteRequest = () => {
+    const { page, seed } = this.state;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+    this.setState({ loading: true });
+
+    fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          data: page === 1 ? res.results : [...this.state.data, ...res.results],
+          error: res.error || null,
+          loading: false,
+          refreshing: false
+        });
+      })
+      .catch(error => {
+        this.setState({ error, loading: false });
+      });
+  };
+
+  handleRefresh = () => {
+    this.setState(
+      {
+        page: 1,
+        seed: this.state.seed + 1,
+        refreshing: true
+      },
+      () => {
+        this.makeRemoteRequest();
+      }
+    );
+  };
+
+  handleLoadMore = () => {
+    this.setState(
+      {
+        page: this.state.page + 1
+      },
+      () => {
+        this.makeRemoteRequest();
+      }
+    );
+  };
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "86%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "14%"
+        }}
+      />
+    );
+  };
+
+  renderHeader = () => {
+    return <SearchBar placeholder="Type Here..." lightTheme round />;
+  };
+
+  renderFooter = () => {
+    if (!this.state.loading) return null;
+
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopWidth: 1,
+          borderColor: "#CED0CE"
+        }}
+      >
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
   };
 
   render() {
     return (
-      <ScrollView>
-        <List>
-          {userStore.getUsers().map((user) => (  //Okay so spread worked here then it suddenly didnt. Pushing code because I am confident that someone more versed in this can easily get it working again.
+      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item }) => (
             <ListItem
-              key={user.login.username}
               roundAvatar
-              avatar={{ uri: user.picture.thumbnail }}
-              title={`${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}`}
-              subtitle={user.email}
-              rightTitle={`${getRandomSport()}`}
+              title={`${item.name.first} ${item.name.last}`}
+              subtitle={item.email}
+              avatar={{ uri: item.picture.thumbnail }}
+              containerStyle={{ borderBottomWidth: 0 }}
             />
-          ))}
-        </List>
-      </ScrollView>
+          )}
+          keyExtractor={item => item.email}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
+          onRefresh={this.handleRefresh}
+          refreshing={this.state.refreshing}
+          onEndReached={this.handleLoadMore}
+          onEndReachedThreshold={50}
+        />
+      </List>
     );
   }
 }
+
+export default FriendsScreen;
