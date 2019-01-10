@@ -5,7 +5,7 @@ import { List, ListItem, SearchBar } from "react-native-elements";
 //https://github.com/ReactNativeSchool/react-native-flatlist-demo/blob/master/FlatListDemo.js
 
 function getRandomSport() {
-  var sports = ['Lacross', 'Hockey', 'Baseball', 'Football','Soccer']
+  var sports = ['Lacross', 'Hockey', 'Baseball', 'Football', 'Soccer']
   return sports[Math.floor(Math.random()*sports.length)];
 }
 
@@ -17,7 +17,6 @@ class FriendsScreen extends Component {
       loading: false,
       data: [],
       page: 1,
-      seed: 1,
       error: null,
       refreshing: false
     };
@@ -28,8 +27,8 @@ class FriendsScreen extends Component {
   }
 
   makeRemoteRequest = () => {
-    const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+    const { page } = this.state;
+    const url = `https://randomuser.me/api/?page=${page}&results=20`;
     this.setState({ loading: true });
 
     fetch(url)
@@ -51,7 +50,6 @@ class FriendsScreen extends Component {
     this.setState(
       {
         page: 1,
-        seed: this.state.seed + 1,
         refreshing: true
       },
       () => {
