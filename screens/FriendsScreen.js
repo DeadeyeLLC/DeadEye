@@ -107,21 +107,25 @@ class FriendsScreen extends Component {
     );
   };
 
+  renderFriend = (friend) => {
+    return (
+      <ListItem
+        roundAvatar
+        title={`${friend.name.first} ${friend.name.last}`}
+        subtitle={friend.email}
+        avatar={{ uri: friend.picture.thumbnail }}
+        containerStyle={{ borderBottomWidth: 0 }}
+        rightTitle={`${getRandomSport(friend.name.first)}`}
+      />
+    )
+  }
+
   render() {
     return (
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
           data={this.state.data}
-          renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.email}
-              avatar={{ uri: item.picture.thumbnail }}
-              containerStyle={{ borderBottomWidth: 0 }}
-              rightTitle={`${getRandomSport(item.name.first)}`}
-            />
-          )}
+          renderItem={({ item }) => ( this.renderFriend(item) )}
           keyExtractor={item => item.email}
           ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
