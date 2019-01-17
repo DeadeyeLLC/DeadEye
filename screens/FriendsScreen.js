@@ -4,6 +4,7 @@ import { List, ListItem, SearchBar } from "react-native-elements";
 
 //https://github.com/ReactNativeSchool/react-native-flatlist-demo/blob/master/FlatListDemo.js
 
+// Dummy data for sports names
 function getRandomSport(somethingWithALengthProp) {
   var sports = ['Lacross', 'Hockey', 'Baseball', 'Football', 'Soccer']
   return sports[somethingWithALengthProp.length%sports.length];
@@ -21,6 +22,10 @@ class FriendsScreen extends Component {
       refreshing: false
     };
   }
+
+  static navigationOptions = {
+    title: `Friends`,
+  };
 
   componentDidMount() {
     this.makeRemoteRequest();
