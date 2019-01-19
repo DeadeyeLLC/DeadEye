@@ -121,14 +121,6 @@ class FriendsScreen extends Component {
   }
 
   render() {
-    if(userStore.state.isLoading){
-      return(
-        <View style={{flex: 1, padding: 20}}>
-          <ActivityIndicator/><Text>This will never stop loading. Your only option to see friends is to reload the app and hope the friends load before the list loads</Text>
-        </View>
-      )
-    }
-
     return (
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
