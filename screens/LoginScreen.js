@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View, Image, KeyboardAvoidingView } from "react-native";
 
 import LoginForm from '../components/forms/LoginForm';
-
+import theme from '../constants/Colors';
 
 export default class Login extends React.Component {
     static navigationOptions = {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#bb0000',
+        backgroundColor: theme.primaryColor,
     },
      logoContainer: {
         alignItems: 'center',

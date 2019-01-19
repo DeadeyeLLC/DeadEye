@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import { List, ListItem, Avatar, Icon, Button   } from "react-native-elements";
-
+import theme from '../constants/Colors';
 
 function getRandomActivity(randomInt) {
   var activityNames = ['Shot Trainer Session', 'Competitive Play: Corners', 'Guided Practice'];
@@ -79,7 +79,7 @@ export default class ProfileScreen extends React.Component {
         avatar={<Icon
           name={activity.icon}
           type='material-community'
-          color='#bb0000'
+          color={theme.primaryColor}
         />}
         rightTitle={`${(activity.date.getMonth()+1).toString()}/${activity.date.getDay().toString()}/${activity.date.getFullYear().toString()}`}
         rightIcon={{name: 'share-variant', type: 'material-community' }}
@@ -106,7 +106,7 @@ export default class ProfileScreen extends React.Component {
               name: 'arrow-down-bold',
               type: 'material-community',
               size: 30,
-              color: '#ffffff'
+              color: theme.secondaryColor
             }}
             onPress={this.handleLoadMore}
           />
@@ -167,10 +167,10 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     alignItems: 'center',
-    backgroundColor: '#bb0000',
+    backgroundColor: theme.primaryColor,
   },
   profileNameText: {
-    color: '#ffffff',
+    color: theme.secondaryColor,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -184,17 +184,17 @@ const styles = StyleSheet.create({
   middleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.secondaryColor,
   },
   statContainer: {
     flex: 1,
     paddingTop: 15,
     paddingBottom: 15,
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.secondaryColor,
   },
   statNumberText: {
-    color: '#bb0000',
+    color: theme.primaryColor,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   bottomContainer: {
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.secondaryColor,
   },
   activityDetailText: {
     color: '#000000',
