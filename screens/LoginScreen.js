@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image, KeyboardAvoidingView } from "react-native";
 
 import LoginForm from '../components/forms/LoginForm';
 
@@ -11,12 +11,12 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView  behavior="padding" style={styles.container}>
                 <View style={styles.logoContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
                     <LoginForm />
-            </View>
+            </KeyboardAvoidingView>
             );
         }
     }
