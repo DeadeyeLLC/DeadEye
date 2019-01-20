@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, FlatList } from 'react-native';
-import { List, ListItem, Avatar, Icon, Button   } from "react-native-elements";
+import { List, ListItem, Avatar, Icon, Button } from "react-native-elements";
 import theme from '../constants/Colors';
 
 function getRandomActivity(randomInt) {

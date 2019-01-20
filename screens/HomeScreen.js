@@ -7,14 +7,23 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 import { WebBrowser } from 'expo';
+
+import {Button} from "react-native-elements";
+import theme from '../constants/Colors';
 
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
+  };
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
   };
 
   render() {
@@ -54,11 +63,23 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
+          <Button
+              buttonStyle={{
+                backgroundColor: "rgba(187,0,0,1)",
+                width: 300,
+                height: 45,
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 20
+              }}
+              icon={{
+                name: 'logout',
+                type: 'material-community',
+                size: 30,
+                color: theme.secondaryColor
+              }}
+              onPress={this._signOutAsync}
+            />
         </View>
       </View>
     );
