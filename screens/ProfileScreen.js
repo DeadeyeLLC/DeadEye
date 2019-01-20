@@ -95,7 +95,7 @@ export default class ProfileScreen extends React.Component {
           <Button
             loading={this.state.loading}
             buttonStyle={{
-              backgroundColor: "rgba(187,0,0,1)",
+              backgroundColor: theme.primaryColor,
               width: 300,
               height: 45,
               borderColor: 'transparent',
