@@ -18,7 +18,7 @@ export default class Login extends React.Component {
                 <View style={styles.logoContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
-                <View style={styles.container}>
+                <View style={styles.inputContainer}>
                     <TextInput style={styles.input}
                         autoCapitalize="none"
                         onSubmitEditing={() => this.passwordInput.focus()}
@@ -62,6 +62,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 600,
         height: 200
+    },
+    inputContainer: {
+        padding: 35
     },
       input: {
         height: 40,
