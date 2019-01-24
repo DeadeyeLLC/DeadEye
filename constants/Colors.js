@@ -1,4 +1,6 @@
-const tintColor = '#2f95dc';
+var appJSON = require('../app.json');
+
+const tintColor = appJSON.expo.primaryColor;
 
 export default {
   tintColor,
@@ -11,4 +13,6 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
-};
+  primaryColor: appJSON.expo.primaryColor,
+  secondaryColor: 'rgb(255,255,255)'
+}
