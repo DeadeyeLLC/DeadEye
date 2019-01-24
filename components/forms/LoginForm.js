@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
 
 export default class LoginForm extends React.Component {
+    
     render(){
         return (
             <KeyboardAvoidingView  behavior="padding" style={styles.container}>
@@ -22,7 +23,7 @@ export default class LoginForm extends React.Component {
                     secureTextEntry />
 
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={this._signInAsync}>Login</Text>
+                    <Text style={styles.buttonText} onPress={this.props.onLogin}>Login</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );
@@ -32,7 +33,8 @@ export default class LoginForm extends React.Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    padding: 35
+    padding: 35,
+    marginBottom: 15
   },
   input: {
     height: 40,
