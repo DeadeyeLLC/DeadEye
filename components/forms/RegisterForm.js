@@ -3,10 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Vi
 import styles from './FormStyles'
 
 export default class LoginForm extends React.Component {
-
+    
     render(){
         return (
-            <KeyboardAvoidingView  behavior="padding" style={styles.formContainer}>
+            <KeyboardAvoidingView  behavior="padding" style={styles.container}>
                 <TextInput style={styles.input}
                     autoCapitalize="none"
                     onSubmitEditing={() => this.passwordInput.focus()}
@@ -17,14 +17,22 @@ export default class LoginForm extends React.Component {
                     placeholderTextColor='rgba(225,225,225,0.7)' />
 
                 <TextInput style={styles.input}
-                    returnKeyType="go"
+                    returnKeyType="next"
+                    onSubmitEditing={() => this.passwordInputConfirm.focus()}
                     ref={(input) => this.passwordInput = input}
                     placeholder='Password'
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     secureTextEntry />
 
+                <TextInput style={styles.input}
+                    returnKeyType="go"
+                    ref={(input) => this.passwordInputConfirm = input}
+                    placeholder='Confirm Password'
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    secureTextEntry />
+
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={this.props.onLogin}>Login</Text>
+                    <Text style={styles.buttonText} onPress={this.props.onRegister}>Create Account</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );

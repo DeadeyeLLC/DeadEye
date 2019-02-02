@@ -3,27 +3,14 @@ import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity,
 
 import theme from '../constants/Colors';
 import LoginForm from '../components/forms/LoginForm';
-import LoginHelper from '../components/LoginHelperSection'
+
 export default class LoginScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this._signInAsync = this._signInAsync.bind(this);
-        this._createAccountScreen = this._createAccountScreen.bind(this);
-        this._forgotPassword = this._forgotPassword.bind(this);
-    }
 
     static navigationOptions = {
-        title: 'Login',
+        title: 'Forgot Password',
     };
 
-    _signInAsync = async () => {
-        await AsyncStorage.setItem('userToken', 'abc');
-        this.props.navigation.navigate('AuthLoading');
-    };
-
-    _createAccountScreen = () => {this.props.navigation.navigate('AuthRegister');}
-
-    _forgotPassword = () => {this.props.navigation.navigate('AuthForgotPassword');}
+    _loginScreen = () => {this.props.navigation.navigate('Auth');}
 
     render() {
         return (
@@ -31,8 +18,13 @@ export default class LoginScreen extends React.Component {
                 <View style={styles.logoContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
-                <LoginForm onLogin={this._signInAsync}/>
-                <LoginHelper onPressButton1={this._createAccountScreen} button1Text='Create Account' onPressForgotPassword={this._forgotPassword}></LoginHelper>
+                <View style={styles.logoContainer}><Text style={styles.buttonText}>Forgot Password Screen Here</Text></View>
+                <View style={styles.buttonContainer}>
+                    <Button onPress={this._loginScreen}
+                        title="Go Back"
+                        color="#841584"
+                        accessibilityLabel="Go back to login screen"></Button>
+                </View>
             </View>
             );
         }
@@ -53,7 +45,19 @@ const styles = StyleSheet.create({
     },
     logo: {
         top: 50,
+        position: 'absolute',
         width: 600,
         height: 200
-    }
+    },
+    buttonContainer: {
+        width: 300,
+        backgroundColor: "#000000",
+        paddingVertical: 15,
+        borderRadius: 20
+      },
+      buttonText: {
+        color: "#fff",
+        textAlign: "center",
+        fontWeight: "700"
+      }
 });
