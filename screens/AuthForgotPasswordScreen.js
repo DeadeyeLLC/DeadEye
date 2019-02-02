@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity, Text } from "react-native";
 
 import theme from '../constants/Colors';
-import LoginForm from '../components/forms/LoginForm';
+import ForgotPasswordForm from '../components/forms/ForgotPasswordForm';
 
 export default class LoginScreen extends React.Component {
 
@@ -10,6 +10,14 @@ export default class LoginScreen extends React.Component {
         title: 'Forgot Password',
     };
 
+    _submitForgottenPassword = async () => {
+        Alert.alert(
+            'Password Recovery',
+            'You will recieve an email with instructions on how to recover your password shortly.'
+        );
+        this.props.navigation.navigate('Auth');
+    };
+    
     _loginScreen = () => {this.props.navigation.navigate('Auth');}
 
     render() {
@@ -18,12 +26,11 @@ export default class LoginScreen extends React.Component {
                 <View style={styles.logoContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
-                <View style={styles.logoContainer}><Text style={styles.buttonText}>Forgot Password Screen Here</Text></View>
-                <View style={styles.buttonContainer}>
-                    <Button onPress={this._loginScreen}
-                        title="Go Back"
-                        color="#841584"
-                        accessibilityLabel="Go back to login screen"></Button>
+                <ForgotPasswordForm onSubmit={this._submitForgottenPassword}/>
+                <View style={styles.container}>
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <Text style={styles.buttonText} onPress={this._loginScreen}>Go Back</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             );
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.primaryColor,
+        backgroundColor: theme.primaryColor
     },
     logoContainer: {
         alignItems: 'center',
@@ -45,7 +52,6 @@ const styles = StyleSheet.create({
     },
     logo: {
         top: 50,
-        position: 'absolute',
         width: 600,
         height: 200
     },
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
         width: 300,
         backgroundColor: "#000000",
         paddingVertical: 15,
-        borderRadius: 20
+        borderRadius: 20,
       },
       buttonText: {
         color: "#fff",
