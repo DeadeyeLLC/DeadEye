@@ -1,27 +1,28 @@
 import React from "react";
-import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity } from "react-native";
 
 import theme from '../constants/Colors';
-import LoginForm from '../components/forms/LoginForm';
+import RegisterForm from '../components/forms/RegisterForm';
 import LoginHelper from '../components/LoginHelperSection'
-export default class LoginScreen extends React.Component {
+
+export default class AuthRegisterScreen extends React.Component {
     constructor(props) {
         super(props);
-        this._signInAsync = this._signInAsync.bind(this);
-        this._createAccountScreen = this._createAccountScreen.bind(this);
+        this._register = this._register.bind(this);
+        this._loginScreen = this._loginScreen.bind(this);
         this._forgotPassword = this._forgotPassword.bind(this);
     }
 
     static navigationOptions = {
-        title: 'Login',
+        title: 'Create Account',
     };
 
-    _signInAsync = async () => {
+    _register = async () => {
         await AsyncStorage.setItem('userToken', 'abc');
         this.props.navigation.navigate('AuthLoading');
     };
 
-    _createAccountScreen = () => {this.props.navigation.navigate('AuthRegister');}
+    _loginScreen = () => {this.props.navigation.navigate('Auth');}
 
     _forgotPassword = () => {this.props.navigation.navigate('AuthForgotPassword');}
 
@@ -31,8 +32,8 @@ export default class LoginScreen extends React.Component {
                 <View style={styles.logoContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
-                <LoginForm onLogin={this._signInAsync}/>
-                <LoginHelper onPressButton1={this._createAccountScreen} button1Text='Create Account' onPressForgotPassword={this._forgotPassword}></LoginHelper>
+                <RegisterForm onRegister={this._register}/>
+                <LoginHelper onPressButton1={this._loginScreen} button1Text='Login' onPressForgotPassword={this._forgotPassword}></LoginHelper>
             </View>
             );
         }
