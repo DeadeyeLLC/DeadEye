@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
-import Expo from "expo";
+import {Google, Facebook} from "expo";
 
 export default class MediaLoginScreen extends React.Component{
     constructor(props) {
@@ -14,9 +14,9 @@ export default class MediaLoginScreen extends React.Component{
 
     signIn = async () => {
         try {
-            const result = await Expo.Google.logInAsync({
+            const result = await Google.logInAsync({
                 iosClientId: "890342215028-7gdm2mlgd80jbsfgqjp24vrbvhmr1kh2.apps.googleusercontent.com",
-                androidClientId: null,
+                androidClientId: "890342215028-22s8db98kfuptuos0690otaqthd3e1me.apps.googleusercontent.com",
                 scopes: ["profile", "email"]
             })
 
