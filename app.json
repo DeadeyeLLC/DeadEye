@@ -23,7 +23,16 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "host.expo.googlesignin",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "890342215028-7gdm2mlgd80jbsfgqjp24vrbvhmr1kh2.apps.googleusercontent.com"
+        }
+      },
       "supportsTablet": true
+    },
+    "android": {
+      "package": "host.expo.googlesignin"
     },
     "primaryColor":"#bb0000"
   }

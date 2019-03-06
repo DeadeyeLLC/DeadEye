@@ -32,6 +32,7 @@ export default class LoginScreen extends React.Component {
                     <Image resizeMode="contain" style={styles.logo} source={require('../assets/images/d-logo-white.png')}/>                    
                 </View>
                 <LoginForm onLogin={this._signInAsync}/>
+                <Button title="Media Sign-In" onPress={() => this.props.navigation.navigate('AuthMediaLogin')}></Button>
                 <LoginHelper onPressButton1={this._createAccountScreen} button1Text='Create Account' onPressForgotPassword={this._forgotPassword}></LoginHelper>
             </View>
             );

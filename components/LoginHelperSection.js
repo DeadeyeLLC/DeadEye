@@ -5,10 +5,10 @@ import theme from '../constants/Colors';
 export default class LoginHelperSection extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity><Text style={styles.text} onPress={this.props.onPressButton1}>{this.props.button1Text}</Text></TouchableOpacity>
-        <TouchableOpacity><Text style={styles.text} onPress={this.props.onPressForgotPassword}>Forgot Password?</Text></TouchableOpacity>
-      </View>
+        <View style={styles.container}>
+          <TouchableOpacity><Text style={styles.text} onPress={this.props.onPressButton1}>{this.props.button1Text}</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.text} onPress={this.props.onPressForgotPassword}>Forgot Password?</Text></TouchableOpacity>
+        </View>
     );
   }
 }
