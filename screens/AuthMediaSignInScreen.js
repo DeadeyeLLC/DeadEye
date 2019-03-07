@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 import {Google, Facebook} from "expo";
 
-export default class MediaLoginScreen extends React.Component{
+export default class MediaLoginScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,7 +12,7 @@ export default class MediaLoginScreen extends React.Component{
         }
     }
 
-    signIn = async () => {
+    googleSignIn = async () => {
         try {
             const result = await Google.logInAsync({
                 iosClientId: "890342215028-7gdm2mlgd80jbsfgqjp24vrbvhmr1kh2.apps.googleusercontent.com",
@@ -34,13 +34,38 @@ export default class MediaLoginScreen extends React.Component{
         }
     }
 
+    facebookSignIn = async () => {
+        try {
+            const {
+                type,
+                token,
+                expires,
+                permissions,
+                declinedPermissions,
+            } = await Facebook.logInWithReadPermissionsAsync('1052008241650999', {
+                permissions: ['public_profile'],
+            })
+            if (type === 'success') {
+                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                console.log(response);
+                this.setState({
+                    signedIn: true,
+                    name: null,
+                    photoUrl: null
+                })
+            }
+        } catch (e) {
+            console.log("error", e);
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 {this.state.signedIn ? (
                     <LoggedInPage name={this.state.name} photoUrl={this.state.photoUrl} />
                 ) : (
-                        <LoginPage signIn={this.signIn} />
+                        <LoginPage facebookSignIn={this.facebookSignIn} googleSignIn={this.googleSignIn} />
                     )}
             </View>
         )
@@ -52,8 +77,11 @@ const LoginPage = props => {
     return (
         <View>
             <Text style={styles.header}>Sign In With Google</Text>
-            <Button title="Sign in with Google"
-                onPress={() => props.signIn()} />
+            <Button title="Google"
+                onPress={() => props.googleSignIn()} />
+            <Text style={styles.header}>Sign In With Facebook</Text>
+            <Button title="Facebook"
+                onPress={() => props.facebookSignIn()} />
         </View>
     )
 }
@@ -62,7 +90,7 @@ const LoggedInPage = props => {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Welcome:{props.name}</Text>
-            <Image style={styles.image} source={{ uri: props.photoUrl }} />
+            {/*<Image style={styles.image} source={{ uri: props.photoUrl }} />*/}
         </View>
     )
 }
