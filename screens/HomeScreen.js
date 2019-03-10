@@ -15,8 +15,9 @@ import {Button} from "react-native-elements";
 import theme from '../constants/Colors';
 
 import { MonoText } from '../components/StyledText';
+import { connect } from 'react-redux';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -45,6 +46,7 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
+            <Text>{this.props.uid}</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
@@ -207,3 +209,10 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+
+const mapStateToProps = (state) => {
+  const { uid } = state.login
+  return { uid }
+};
+
+export default connect(mapStateToProps)(HomeScreen);

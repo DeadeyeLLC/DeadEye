@@ -14,7 +14,6 @@ function getRandomActivity(randomInt) {
     case 'Competitive Play: Corners': lines = ['Accuracy Score 88%','Max Speed 71 MPH', 'You Beat Anthony Saitta!']; icon='trophy'; break;
     case 'Guided Practice': lines = ['Four Leaf: Coach Ray Monday Workout','Percentage Completed: 100%']; icon='clover'; break;
   }
-console.log(date.getTime().toString());
   return { "id":`${date.getTime().toString()}`, "name":name, "date":date, "lines":lines, "icon":icon }
 }
 

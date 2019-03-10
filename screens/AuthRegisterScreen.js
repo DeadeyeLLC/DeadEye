@@ -18,7 +18,6 @@ export default class AuthRegisterScreen extends React.Component {
     };
 
     _register = async () => {
-        await AsyncStorage.setItem('userToken', 'abc');
         this.props.navigation.navigate('AuthLoading');
     };
 

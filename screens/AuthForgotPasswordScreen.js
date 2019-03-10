@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity,
 import theme from '../constants/Colors';
 import ForgotPasswordForm from '../components/forms/ForgotPasswordForm';
 
-export default class LoginScreen extends React.Component {
+export default class AuthForgotPassword extends React.Component {
 
     static navigationOptions = {
         title: 'Forgot Password',
