@@ -1,45 +1,29 @@
 import React from "react";
-import { StyleSheet, View, Image, AsyncStorage, Alert, Button, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Image} from "react-native";
 
 import theme from '../constants/Colors';
 import LoginForm from '../components/forms/LoginForm';
 import LoginHelper from '../components/LoginHelperSection';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addUserId, addDbInfo } from '../actions/LoginActions';
+import { addUid } from '../actions/LoginActions';
 
-const { Stitch, AnonymousCredential } = 
+const { AnonymousCredential } = 
         require('mongodb-stitch-react-native-sdk');
-const MongoDB = require('mongodb-stitch-react-native-services-mongodb-remote');
 
 class AuthLoginScreen extends React.Component {
     constructor(props) {
-        super(props);
+       super(props);
         //this._loadClient();
         this._signInAsync = this._signInAsync.bind(this);
         this._createAccountScreen = this._createAccountScreen.bind(this);
         this._forgotPassword = this._forgotPassword.bind(this);
         //this._getServerInstanceInfo = this._getServerInstanceInfo.bind(this);
-    }
-    componentDidMount() {
-        this._loadClient();
-    }
-
+    } 
+    
     static navigationOptions = {
         title: 'Login',
     };
-
-    _loadClient() {
-        Stitch.initializeDefaultAppClient('deadeye-qyvhe').then(client => {
-          //this.setState({ client });
-          const dbClient = client.getServiceClient(MongoDB.RemoteMongoClient.factory, 'mongodb-atlas');
-          //this.setState({dbClient : dbClient});
-          //this.setState({db : dbClient.db('deadeye')});
-          const db = dbClient.db('deadeye');
-          this.setState({client, db, dbClient});
-          this.props.addDbInfo({client, db, dbClient});
-        });
-    }
 
     _signInAsync = async () => {
         this._onLogin();
@@ -55,16 +39,17 @@ class AuthLoginScreen extends React.Component {
     };
 
     _onLogin() {
-        const clientAuth = this.state.client.auth;
+        const clientAuth = this.props.database.client.auth;
         if (clientAuth) {
             clientAuth.loginWithCredential(new AnonymousCredential()).then(user => {
-                this.props.addUserId(user.id);
+                this.props.addUid(user.id);
                 this.props.navigation.navigate('AuthLoading');
             }).catch(err => {
+                console.log(err);
                 //this.props.addUserId({ currentUserId: undefined })
             });
         } else {
-            console.log(err);
+            console.log('Error: Database Instance is null');
         }
     }
 
@@ -115,8 +100,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
-      addUserId,
-      addDbInfo
+      addUid,
     }, dispatch)
 );
 

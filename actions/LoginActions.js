@@ -1,8 +1,8 @@
-import {ADD_USER_ID, ADD_DB_INFO} from '../types';
+import {ADD_UID, ADD_DB_INFO} from '../types';
 
-export const addUserId = uid => (
+export const addUid = uid => (
     {
-        type: ADD_USER_ID,
+        type: ADD_UID,
         payload: uid,
     }
 );

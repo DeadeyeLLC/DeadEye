@@ -1,4 +1,4 @@
-import {ADD_USER_ID, ADD_DB_INFO} from '../types';
+import {ADD_UID, ADD_DB_INFO} from '../types';
 
 const initialState = {
     database: {},
@@ -7,7 +7,7 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_USER_ID:
+        case ADD_UID:
             const newState = Object.assign({}, state, {uid: action.payload});
             //state.uid = action.payload;
             return newState;
