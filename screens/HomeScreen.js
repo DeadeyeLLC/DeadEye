@@ -24,6 +24,7 @@ class HomeScreen extends React.Component {
 
   _signOutAsync = async () => {
     await AsyncStorage.clear();
+    this.props.database.client.auth.logout();
     this.props.navigation.navigate('Auth');
   };
 
@@ -211,8 +212,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { uid } = state.login
-  return { uid }
+  const { uid, database } = state.login
+  return { uid, database }
 };
 
 export default connect(mapStateToProps)(HomeScreen);
