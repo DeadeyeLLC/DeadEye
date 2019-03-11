@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addUid } from '../actions/LoginActions';
 
-const { AnonymousCredential } = 
+const { UserPasswordCredential } = 
         require('mongodb-stitch-react-native-sdk');
 
 class AuthLoginScreen extends React.Component {
@@ -25,23 +25,13 @@ class AuthLoginScreen extends React.Component {
         title: 'Login',
     };
 
-    _signInAsync = async () => {
-        this._onLogin();
-        
-        /* When login integrated: 
-        const isSuccess = await logInUser();
-        if (isSuccess) {
-            this._onLogin();
-            this.props.navigation.navigate('Home');
-        } else {
-            this._onFailure();
-        }*/
-    };
-
-    _onLogin() {
+    _signInAsync = async (email, password) => {
+        //this._onLogin();
+        console.log('_signInAsync called');
         const clientAuth = this.props.database.client.auth;
-        if (clientAuth) {
-            clientAuth.loginWithCredential(new AnonymousCredential()).then(user => {
+        if( clientAuth && email && password) {
+            console.log('Attempting login');
+            clientAuth.loginWithCredential( new UserPasswordCredential(email, password)).then(user => {
                 this.props.addUid(user.id);
                 this.props.navigation.navigate('AuthLoading');
             }).catch(err => {
@@ -49,9 +39,9 @@ class AuthLoginScreen extends React.Component {
                 //this.props.addUserId({ currentUserId: undefined })
             });
         } else {
-            console.log('Error: Database Instance is null');
-        }
-    }
+            console.log('Error validating client, email, or pass');
+        }       
+    };
 
     /*_getServerInstanceInfo = () => {
         return {

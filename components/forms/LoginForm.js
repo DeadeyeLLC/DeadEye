@@ -3,6 +3,10 @@ import { StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Vi
 import styles from './FormStyles'
 
 export default class LoginForm extends React.Component {
+    state = {
+        email: null,
+        password: null,
+    }
 
     render(){
         return (
@@ -14,17 +18,19 @@ export default class LoginForm extends React.Component {
                     keyboardType='email-address'
                     returnKeyType="next"
                     placeholder='Username'
-                    placeholderTextColor='rgba(225,225,225,0.7)' />
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(text) => this.setState({email: text})}/>
 
                 <TextInput style={styles.input}
                     returnKeyType="go"
                     ref={(input) => this.passwordInput = input}
                     placeholder='Password'
                     placeholderTextColor='rgba(225,225,225,0.7)'
-                    secureTextEntry />
+                    secureTextEntry
+                    onChangeText={(text) => this.setState({password: text})}/>
 
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={this.props.onLogin}>Login</Text>
+                    <Text style={styles.buttonText} onPress={() => {this.props.onLogin(this.state.email, this.state.password)}}>Login</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );
